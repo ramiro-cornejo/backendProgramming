@@ -1,12 +1,15 @@
 {
-  "name": "class",
+  "name": "backend",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "node ."
+    "start": "node mains.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "moment": "^2.29.3"
+  }
 }
