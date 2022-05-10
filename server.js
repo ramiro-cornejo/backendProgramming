@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
 // Devuelve array con todos los productos disp en el servidor
 app.get('/productos', apiControllers.productos)
 // Devuelve producto elegido al azar entre todos
-app.get('/randomProductos', apiControllers.randomProductos)
+app.get('/randomProducto', apiControllers.randomProducto)
 
 // endpoints de puerto
 const PORT = 8080;

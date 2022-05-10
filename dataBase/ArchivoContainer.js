@@ -48,6 +48,13 @@ class ArchivoContainer {
             return this.productos[index];
         }
     }
+    
+    async getRandomProducto() {
+        await this._readfile();
+        const index = Math.floor(Math.random() * this.productos.length);
+        console.log(this.productos[index]);
+        return this.productos[index];
+    }
 
     //Elimina obj con el id buscado
     async deleteById(id) {
