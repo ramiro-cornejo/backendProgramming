@@ -26,7 +26,14 @@ class ArchivoContainer {
     // async para poder usar await(espero)
     // guardar obj
     async save(datos) {
-        const producto = new Producto(datos.id, datos.title, datos.price, datos.thumbnail)
+        const productID = Date.now();
+        const producto = new Producto(
+            productID, 
+            datos.title, 
+            datos.price, 
+            datos.thumbnail
+        );
+
         await this._readfile();
         this.productos.push(producto);
         await this._saveFile()
@@ -39,9 +46,9 @@ class ArchivoContainer {
     }
 
     //Recibe id y devuelve el obj con ese id, null sino esta
-    async getById(id) {
+    async getById(productID) {
         await this._readfile();
-        const index = this.productos.findIndex(producto => producto.id === id)
+        const index = this.productos.findIndex(producto => producto.id === productID)
         if (this.productos[index] == null) {
             return null;
         } else {
@@ -57,9 +64,9 @@ class ArchivoContainer {
     }
 
     //Elimina obj con el id buscado
-    async deleteById(id) {
+    async deleteById(productID) {
         await this._readfile();
-        const index = this.productos.findIndex(producto => producto.id === id)
+        const index = this.productos.findIndex(producto => producto.id === productID)
         if (index !== -1) {
             this.productos.splice(index, 1);
             await this._saveFile();

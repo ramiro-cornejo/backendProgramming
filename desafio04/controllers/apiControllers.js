@@ -4,11 +4,34 @@ const productos = new ArchivoContainer('dataBase/productos.txt');
 
 const apiControllers = {
     productos: async (req, res) => {
-        res.json(await productos.getAll())
+        if (req.method === "GET"){
+            res.json(await productos.getAll())
+        } else if (req.method === "POST") {
+            res.json(productos.save(req.body));
+        }
     },
-    randomProducto: async (req, res) => {
-        res.json(await productos.getRandomProducto())
-    }
-}
+    productById: (req, res) => {
+        const { id } = req.params;
+    
+        if (req.method === "GET") {
+            res.json(productos.getById(parseInt(id)));
+        }else if (req.method === "PUT") {
+        const productos = productos.getById(parseInt(id));
+        if (!!productos) {
+            productos.title = req.body.title;
+            productos.price = req.body.price;
+            productos.thumbnail = req.body.thumbnail;
+            res.json(productos.title + " Actualizado");
+        }
+        }else if (req.method === "DELETE") {
+            productos.deleteById(parseInt(id));
+            res.json(productos.title + " Delete");
+        }
+    },
+    
+    randomProducto: async(req, res) => {
+        res.json(await productos.getRandomProducto());
+    },
+};
 
 module.exports = { apiControllers }
