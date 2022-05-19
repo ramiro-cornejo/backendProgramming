@@ -6,13 +6,12 @@
 <title>Document</title>
 </head>
 <body>
-<span></span> <!-- para inyectar el resultado -->
+<span id="contenidoId"></span> <!-- para inyectar el resultado -->
 <!-- incluir handlebars desde el CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
-<script>
-    const template = Handlebars.compile('<h1>{{nombre}}</h1>'); // compila la plantilla
-    const html = template({ nombre: 'Nombre de producto' }); // genera el html
-    document.querySelector('span').innerHTML = html; // inyecta el resultado en la vista
-</script>
+<!-- Ruta absoluta -->
+<!-- <script src="http://localhost:8080/js/inicio.js"></script> -->
+<!-- Ruta relativa -->
+<script src="js/inicio.js"></script>
 </body>
 </html>
