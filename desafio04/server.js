@@ -1,11 +1,17 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const multer = require('multer');
 const { apiControllers } = require('./controllers/apiControllers')
 
 
 const app = express();
 
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:true}))
+app.use("/public", express.static('./public'));
+
 app.get('/', (req, res) => {
-    res.send('Servidor Express')
+    res.sendFile(__dirname + '/public/index.html')
 })
 
 // Devuelve array con todos los productos disp en el servidor
@@ -16,9 +22,8 @@ app.get('/api/productos/:id', apiControllers.productos);
 app.get('/api/randomProducto', apiControllers.randomProducto);
 
 app.post('api/productos', apiControllers.productos);
-
-//app.put('/api/productos/:id',apiControllers.) COMPLETAR
-// app.delete('api/productos/:id',apiControllers.)
+app.put('/api/productos/:id',apiControllers.productById);
+app.delete('api/productos/:id',apiControllers.productById);
 
 
 // endpoints de puerto

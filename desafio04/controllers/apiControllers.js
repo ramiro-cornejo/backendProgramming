@@ -10,22 +10,20 @@ const apiControllers = {
             res.json(productos.save(req.body));
         }
     },
+
     productById: (req, res) => {
         const { id } = req.params;
     
         if (req.method === "GET") {
             res.json(productos.getById(parseInt(id)));
         }else if (req.method === "PUT") {
-        const productos = productos.getById(parseInt(id));
-        if (!!productos) {
-            productos.title = req.body.title;
-            productos.price = req.body.price;
-            productos.thumbnail = req.body.thumbnail;
-            res.json(productos.title + " Actualizado");
-        }
+            productos.update(req.body);
+            res.json(req.body.title + "Actualizado");
         }else if (req.method === "DELETE") {
             productos.deleteById(parseInt(id));
-            res.json(productos.title + " Delete");
+            res.json(req.body.title + " Delete");
+        } else {
+            console.log(req.method);
         }
     },
     
