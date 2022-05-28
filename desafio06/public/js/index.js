@@ -6,8 +6,8 @@ socket.on('cnx0k', data => {
 
 socket.on('HOLA', () => {
     const msg = 'El servidor esta funcionando'
-    const p = document.getElementById('encabezado')
-    p.innerHTML = msg
+    const div = document.getElementById('mensaje')
+    div.innerHTML = msg
 })
 
 const btn = document.getElementById('btn_enviar')

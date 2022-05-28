@@ -1,5 +1,4 @@
 const express = require('express')
-const res = require('express/lib/response')
 const { Server: HttpServer } = require('http')
 const { Server: SocketServer } = require('socket.io')
 
@@ -10,7 +9,7 @@ const io = new SocketServer(httpServer)
 app.use(express.static('public'))
 
 app.get('/', (req,res) => {
-    res.sendFile('index.html' , { root: './views '})
+    res.sendFile('index.html' , { root: './views'})
 })
 
 io.on('connection' , socket => {
