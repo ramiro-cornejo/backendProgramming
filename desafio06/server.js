@@ -6,17 +6,22 @@ const app = express()
 const httpServer = new HttpServer(app)
 const io = new SocketServer(httpServer)
 
+const { obtenerMensajes, guardarMensaje } = require('./mensajes.js')
+
 app.use(express.static('public'))
 
 app.get('/', (req,res) => {
-    res.sendFile('index.html' , { root: './views'})
+    res.sendFile('index.html' , { root:'./views'})
 })
 
 io.on('connection' , socket => {
-    console.log('alguien se conecto')
-    socket.emit('cnx0k', { fecha: new Date().toLocaleString() })
-    socket.on('ping', () => {
-        console.log(`socket '${socket.id}' dice PING`)
+    const mensajes = obtenerMensajes()
+    socket.emit('mensajes', { mensajes })
+    
+    socket.on('mensaje', mensaje => {
+        guardarMensaje(mensaje)
+        const mensajes = obtenerMensajes()
+        io.sockets.emit('mensajes', {mensajes})
     })
 })
 

@@ -1,17 +1,30 @@
-const socket = io("/")
+const socket = io("")
 
-socket.on('cnx0k', data => {
-    console.log(data)
+socket.on('mensajes', ({mensajes}) => {
+    console.log(mensajes)
+    mostrarMensajes(mensajes)
 })
 
-socket.on('HOLA', () => {
-    const msg = 'El servidor esta funcionando'
-    const div = document.getElementById('mensaje')
-    div.innerHTML = msg
-})
 
 const btn = document.getElementById('btn_enviar')
 btn.addEventListener('click', event => {
+    const autor = document.getElementById('inputAutor').value
     const texto = document.getElementById('inputText').value
-    socket.emit('mensaje', { texto })
+    socket.emit('mensaje', { autor, texto })
 })
+
+function listadoMsj(lineas) {
+    const listItem = lineas.map(l => `<li>${l}</li>`)
+    const html = 
+    `<ul> 
+    ${listItem.join('')}
+    </ul>`
+        return html
+}
+
+function mostrarMensajes(mensajes) {
+    const divMensajes = document.getElementById('mensajes')
+    const lineasMensajes = mensajes.map( o => `${o.autor} : ${o.texto}`)
+
+    divMensajes.innerHTML = listadoMsj(lineasMensajes)
+}
