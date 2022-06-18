@@ -14,8 +14,10 @@
         -d docker.io/library/mysql
 
 ## Ejemplo
+    docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag (usar en una linea(funciono))
+
     docker run \
-        --name drm-mysql-2 \
+        --name drm-mysql \
         -e MYSQL_ROOT_PASSWORD=mysqlpassword \
         -p 3307:3306 \
         -d mysql
@@ -31,7 +33,11 @@
     docker pull mariadb
 
 ## Crea y lanza el contenedor
-    docker run --name drm-mariadb -e MYSQL_ROOT_PASSWORD=mymariadbpassword -p 3306:3306 -d mariadb
+    docker run \
+    --name drm-mariadb \
+    -e MYSQL_ROOT_PASSWORD=mymariadbpassword \
+    -p 3306:3306 \
+    -d mariadb
 
 ------------------------------------------------
 
