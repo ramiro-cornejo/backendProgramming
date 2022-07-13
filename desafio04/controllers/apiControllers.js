@@ -1,35 +1,36 @@
-const  ArchivoContainer  = require('../container/ArchivoContainer.js');
+const Container = require("../containers/ArchiveContainer.js");
 
-const productos = new ArchivoContainer('dataBase/productos.txt');
+const products = new Container("./db/products.txt");
 
 const apiControllers = {
-    productos: async (req, res) => {
-        if (req.method === "GET"){
-            res.json(await productos.getAll())
-        } else if (req.method === "POST") {
-            res.json(productos.save(req.body));
-        }
-    },
+  products: (req, res) => {
+    if (req.method === "GET") {
+      res.json(products.getAll());
+    } else if (req.method === "POST") {
+      res.json(products.save(req.body));
+    }
+  },
 
-    productById: (req, res) => {
-        const { id } = req.params;
-    
-        if (req.method === "GET") {
-            res.json(productos.getById(parseInt(id)));
-        }else if (req.method === "PUT") {
-            productos.update(req.body);
-            res.json(req.body.title + "Actualizado");
-        }else if (req.method === "DELETE") {
-            productos.deleteById(parseInt(id));
-            res.json(req.body.title + " Delete");
-        } else {
-            console.log(req.method);
-        }
-    },
-    
-    randomProducto: async(req, res) => {
-        res.json(await productos.getRandomProducto());
-    },
+  productById: (req, res) => {
+    const { id } = req.params;
+
+    if (req.method === "GET") {
+      res.json(products.getById(parseInt(id)));
+    } else if (req.method === "PUT") {
+      products.update(req.body);
+
+      res.json(req.body.title + " updated correctly.");
+    } else if (req.method === "DELETE") {
+      products.deleteById(parseInt(id));
+      res.json(req.body.id + " was deleted correctly.");
+    } else {
+      console.log(req.method);
+    }
+  },
+
+  randomProduct: (req, res) => {
+    res.json(products.getRandomProduct());
+  },
 };
 
-module.exports = { apiControllers }
+module.exports = { apiControllers };

@@ -1,7 +1,7 @@
 
 
 // Definición de clase
-class Producto {
+class Product {
     constructor(id, title, price, thumbnail) {
         if (!id) throw new Error('Agregar ID')
         if (!title) throw new Error('Agregar título')
@@ -18,4 +18,4 @@ class Producto {
 
 
 //Exportar codigo
-module.exports = Producto
+module.exports = Product
