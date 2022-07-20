@@ -3,7 +3,7 @@ import { Strategy } from 'passport-local'
 
 import { obtenerUsuarioPorId } from '../persistencia/usuarios.js'
 
-import { registrarUsuario } from '../api/usuariosApi.js'
+import { registrarUsuario } from '../api/usuarioApi.js'
 import { autenticar } from '../api/authApi.js'
 
 //cargar estrategias
